@@ -1,3 +1,3 @@
 # lomoda
 ## Ссылка на GitHub Pages
-[star_wars](https://slawaslawa.github.io/star_wars/)
+[lomoda-js](https://slawaslawa.github.io/glo-lomoda-js/)
