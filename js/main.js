@@ -2,18 +2,31 @@
 const headerCityButton = document.querySelector('.header__city-button');
 let hash = location.hash.substring(1);
 
-headerCityButton.textContent = localStorage.getItem('lomoda-location') || 'Ваш город?';
+
+
+const updateLocation = () => {
+    const lsLocation = localStorage.getItem('lomoda-location');
+    headerCityButton.textContent =
+        lsLocation && lsLocation !== 'null' ?
+            lsLocation : 'Ваш город?';
+};
 
 headerCityButton.addEventListener('click', () => {
-    const city = prompt('Укажите Ваш город');
-    headerCityButton.textContent = city;
-    localStorage.setItem('lomoda-location', city);
+    const city = prompt('Укажите Ваш город').trim();
+    if (city !== null) {
+        localStorage.setItem('lomoda-location', city);
+    }
+    updateLocation();
 });
+
+updateLocation();
 
 // blocked scroll
 
 const disableScroll = () => {
+    if (document.disableScroll) return;
     const widthScroll = window.innerWidth - document.body.offsetWidth;
+    document.disableScroll = true;
     document.body.dbScrollY = window.scrollY;
     document.body.style.cssText = `
             position: fixed;
@@ -27,6 +40,8 @@ const disableScroll = () => {
 };
 
 const enableScroll = () => {
+    document.disableScroll = true;
+
     const widthScroll = window.innerWidth - document.body.offsetWidth;
     document.body.style.cssText = '';
     window.scroll({
