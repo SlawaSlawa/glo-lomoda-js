@@ -123,6 +123,20 @@ try {
         return li;
     };
 
+    const setGoodsTitle = (hash) => {
+        const title = document.querySelector('.goods__title');
+        const navigationItems = document.querySelectorAll('.navigation__link');
+
+        navigationItems.forEach(item => {
+            if (item.hash.substr(1) === hash) {
+                title.textContent = item.textContent;
+            }
+        });
+
+    };
+
+    setGoodsTitle(hash);
+
     const renderGoodsList = data => {
         goodsList.textContent = '';
 
@@ -134,6 +148,7 @@ try {
 
     window.addEventListener('hashchange', () => {
         hash = location.hash.substr(1);
+        setGoodsTitle(hash);
         getGoods(renderGoodsList, hash);
     });
 
